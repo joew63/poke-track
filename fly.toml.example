@@ -1,0 +1,17 @@
+# Copy to fly.toml and run `fly launch --no-deploy` once to create the app,
+# then `fly deploy`. This runs poke-track as a background worker (no HTTP port).
+#
+# Secrets (don't put these in fly.toml): fly secrets set BESTBUY_API_KEY=... DISCORD_WEBHOOK_URL=... etc.
+# config.yaml: bake it into the image (COPY config.yaml in Dockerfile) or mount a Fly volume.
+
+app = "poke-track"           # change to a unique name
+primary_region = "iad"        # pick the region closest to you
+
+[build]
+
+[processes]
+  worker = "python -m poke_track.main"
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "1gb"               # Playwright/Chromium needs more than the default 256mb

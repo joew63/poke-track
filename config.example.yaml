@@ -1,0 +1,52 @@
+# Copy this file to config.yaml and customize it.
+#
+# Two ways to track a product:
+#
+# 1) By URL — works for any store. Add the exact product page URL you want restock
+#    alerts for. (For Best Buy, you can use the numeric SKU instead of a URL.)
+#
+# 2) By search — Best Buy only, for now. Instead of hand-picking URLs, give a search
+#    term plus keywords to match against, and every matching product (including ones
+#    that don't exist yet at config-writing time, e.g. a brand new set's ETB) gets
+#    tracked automatically. This only works for Best Buy because they have an official
+#    search API; Target/Pokemon Center gate search/category pages behind the same bot
+#    detection as everything else on their sites (see README).
+
+poll_interval_seconds: 300
+
+products:
+  # --- Best Buy: auto-discovers every current ETB / booster box / booster bundle ---
+  - store: bestbuy
+    search: "Pokemon Trading Card Game"
+    match_keywords:
+      - "Elite Trainer Box"
+      - "Booster Box"
+      - "Booster Display Box"
+      - "Booster Bundle"
+    name: "Best Buy Pokemon TCG"
+
+  # --- Target: pick specific products (real examples below, swap in whatever's current) ---
+  - store: target
+    url: "https://www.target.com/p/pok-233-mon-mega-evolution-s3-perfect-order-elite-trainer-box/-/A-95230445"
+    name: "Target: Mega Evolution Perfect Order ETB"
+
+  - store: target
+    url: "https://www.target.com/p/pokemon-trading-card-game-scarlet-38-violet-36ct-booster-display-box/-/A-88909617"
+    name: "Target: Scarlet & Violet Booster Display Box (36ct)"
+
+  - store: target
+    url: "https://www.target.com/p/pok-233-mon-trading-card-game-crown-zenith-booster-bundle-box/-/A-94091405"
+    name: "Target: Crown Zenith Booster Bundle"
+
+  # --- Pokemon Center: same idea, one URL per product ---
+  - store: pokemoncenter
+    url: "https://www.pokemoncenter.com/product/10-10372-109/pokemon-tcg-mega-evolution-perfect-order-pokemon-center-elite-trainer-box"
+    name: "Pokemon Center: Mega Evolution Perfect Order ETB"
+
+  - store: pokemoncenter
+    url: "https://www.pokemoncenter.com/product/10-10380-119/pokemon-tcg-mega-evolution-perfect-order-booster-display-box-36-packs"
+    name: "Pokemon Center: Mega Evolution Perfect Order Booster Display Box"
+
+  - store: pokemoncenter
+    url: "https://www.pokemoncenter.com/product/10-10377-109/pokemon-tcg-mega-evolution-perfect-order-booster-bundle-6-packs"
+    name: "Pokemon Center: Mega Evolution Perfect Order Booster Bundle"

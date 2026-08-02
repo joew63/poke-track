@@ -1,0 +1,16 @@
+{
+  "in_stock": {
+    "sku": 6432119,
+    "name": "Pokemon Trading Card Game: Sample Booster Box (36 Packs)",
+    "salePrice": 161.99,
+    "onlineAvailability": true,
+    "inStoreAvailability": false
+  },
+  "out_of_stock": {
+    "sku": 6432120,
+    "name": "Pokemon Trading Card Game: Sample Booster Box 2 (36 Packs)",
+    "salePrice": 161.99,
+    "onlineAvailability": false,
+    "inStoreAvailability": false
+  }
+}

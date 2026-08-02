@@ -1,0 +1,26 @@
+[project]
+name = "poke-track"
+version = "0.1.0"
+description = "Pokemon card retail stock checker and notifier"
+requires-python = ">=3.9"
+dependencies = [
+    "requests>=2.31",
+    "pyyaml>=6.0",
+    "python-dotenv>=1.0",
+    "playwright>=1.48,<1.56",
+]
+
+[project.scripts]
+poke-track = "poke_track.main:main"
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
