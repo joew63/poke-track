@@ -19,7 +19,7 @@ def test_loads_valid_config(tmp_path):
             name: "Test Item"
         """,
     )
-    config = load_config(config_path, env_path=str(tmp_path / "does-not-exist.env"))
+    config = load_config(config_path)
     assert config.poll_interval_seconds == 60
     assert len(config.products) == 1
     assert config.products[0].store == "bestbuy"
@@ -35,7 +35,7 @@ def test_defaults_poll_interval_when_omitted(tmp_path):
             url: "https://www.target.com/p/x/-/A-1"
         """,
     )
-    config = load_config(config_path, env_path=str(tmp_path / "does-not-exist.env"))
+    config = load_config(config_path)
     assert config.poll_interval_seconds == 300
     assert config.products[0].name == "https://www.target.com/p/x/-/A-1"
 
@@ -55,7 +55,7 @@ def test_unknown_store_raises(tmp_path):
         """,
     )
     with pytest.raises(ValueError, match="unknown store"):
-        load_config(config_path, env_path=str(tmp_path / "does-not-exist.env"))
+        load_config(config_path)
 
 
 def test_missing_url_raises(tmp_path):
@@ -67,13 +67,13 @@ def test_missing_url_raises(tmp_path):
         """,
     )
     with pytest.raises(ValueError, match="needs either 'url' or 'search'"):
-        load_config(config_path, env_path=str(tmp_path / "does-not-exist.env"))
+        load_config(config_path)
 
 
 def test_no_products_raises(tmp_path):
     config_path = write_config(tmp_path / "config.yaml", "products: []")
     with pytest.raises(ValueError, match="No products configured"):
-        load_config(config_path, env_path=str(tmp_path / "does-not-exist.env"))
+        load_config(config_path)
 
 
 def test_loads_bestbuy_search_query(tmp_path):
@@ -89,7 +89,7 @@ def test_loads_bestbuy_search_query(tmp_path):
             name: "Best Buy Pokemon TCG"
         """,
     )
-    config = load_config(config_path, env_path=str(tmp_path / "does-not-exist.env"))
+    config = load_config(config_path)
     assert config.products == []
     assert len(config.search_queries) == 1
     query = config.search_queries[0]
@@ -108,7 +108,7 @@ def test_search_on_unsupported_store_raises(tmp_path):
         """,
     )
     with pytest.raises(ValueError, match="only supported for bestbuy"):
-        load_config(config_path, env_path=str(tmp_path / "does-not-exist.env"))
+        load_config(config_path)
 
 
 def test_search_and_url_products_can_coexist(tmp_path):
@@ -122,6 +122,6 @@ def test_search_and_url_products_can_coexist(tmp_path):
             url: "https://www.target.com/p/x/-/A-1"
         """,
     )
-    config = load_config(config_path, env_path=str(tmp_path / "does-not-exist.env"))
+    config = load_config(config_path)
     assert len(config.search_queries) == 1
     assert len(config.products) == 1

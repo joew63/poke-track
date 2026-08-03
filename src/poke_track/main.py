@@ -4,6 +4,8 @@ import os
 import random
 import time
 
+from dotenv import load_dotenv
+
 from .checkers import REGISTRY
 from .config import AppConfig, load_config
 from .discovery import discover_products
@@ -86,6 +88,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
+    load_dotenv()
     notifiers = build_notifiers()
 
     if args.test_notify:

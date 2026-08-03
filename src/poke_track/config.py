@@ -1,9 +1,8 @@
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import List, Optional
+from typing import List
 
 import yaml
-from dotenv import load_dotenv
 
 from .checkers import REGISTRY
 from .models import Product
@@ -32,9 +31,7 @@ class AppConfig:
     search_queries: List[SearchQuery]
 
 
-def load_config(config_path: str = "config.yaml", env_path: Optional[str] = None) -> AppConfig:
-    load_dotenv(env_path)
-
+def load_config(config_path: str = "config.yaml") -> AppConfig:
     path = Path(config_path)
     if not path.exists():
         raise FileNotFoundError(
