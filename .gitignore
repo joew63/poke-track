@@ -9,3 +9,5 @@ venv/
 .env
 config.yaml
 state.json
+
+.claude/
